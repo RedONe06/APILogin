@@ -20,5 +20,9 @@ namespace API_Login.Models
         {
             Conteudo = $"{_configuration.GetValue<string>("EmailSettings:UrlBase")}/ativa?Id={usuarioIdentity.Id}&CodigoDeAtivacao={codigoDeAtivacao}";
         }
+        public void DefinirMensagemDeReset(string codigoDeReset)
+        {
+            Conteudo = $"Token = {codigoDeReset}";
+        }
     }
 }

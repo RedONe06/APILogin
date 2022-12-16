@@ -11,13 +11,13 @@ namespace API_Login.Services
     {
         private IMapper _mapper;
         private UserManager<IdentityUser<int>> _userManager;
-        private AtivarService _ativarService;
+        private ContatoService _contatoService;
 
-        public CadastroService(IMapper mapper, UserManager<IdentityUser<int>> userManager, AtivarService ativarService)
+        public CadastroService(IMapper mapper, UserManager<IdentityUser<int>> userManager, ContatoService ativarService)
         {
             _mapper = mapper;
             _userManager = userManager;
-            _ativarService = ativarService;
+            _contatoService = ativarService;
         }
         public Result CadastrarUsuario(CreateUsuarioDTO usuarioDTO)
         {
@@ -26,7 +26,7 @@ namespace API_Login.Services
             Task<IdentityResult> criarUsuario = _userManager.CreateAsync(usuarioIdentity, usuarioDTO.Password);
             if(criarUsuario.Result.Succeeded)
             {
-                string sistemaDeAtivacao = _ativarService.EnviarEmailDeConfirmacao(usuarioIdentity);
+                string sistemaDeAtivacao = _contatoService.EnviarEmailDeAtivacao(usuarioIdentity);
                 return Result.Ok().WithSuccess(sistemaDeAtivacao);
             }
             return Result.Fail(criarUsuario.Result.ToString());

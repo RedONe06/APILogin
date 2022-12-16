@@ -26,5 +26,27 @@ namespace API_Login.Controllers
             }
             return Ok(resultado.Successes.FirstOrDefault());
         }
+
+        [HttpPost("/solicita-reset")]
+        public IActionResult SolicitarResetDeSenha(SolicitaResetRequest request)
+        {
+            Result resultado = _loginService.SolicitarResetDeSenha(request);
+            if (resultado.IsFailed)
+            {
+                return Unauthorized(resultado.Errors.FirstOrDefault());
+            }
+            return Ok(resultado.Successes.FirstOrDefault());
+        }
+
+        [HttpPost("/executa-reset")]
+        public IActionResult ExecutarResetDeSenha(ExecutaResetRequest request)
+        {
+            Result resultado = _loginService.ExecutarResetDeSenha(request);
+            if (resultado.IsSuccess)
+            {
+                return Ok(resultado.Successes.FirstOrDefault());
+            }
+            return BadRequest(resultado.Errors.FirstOrDefault());
+        }
     }
 }

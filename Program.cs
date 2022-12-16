@@ -12,7 +12,7 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddScoped<AtivarService, AtivarService>();
+builder.Services.AddScoped<ContatoService, ContatoService>();
 builder.Services.AddScoped<CadastroService, CadastroService>();
 builder.Services.AddScoped<EmailService, EmailService>();
 builder.Services.AddScoped<TokenService, TokenService>();
